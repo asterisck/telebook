@@ -66,7 +66,6 @@ def book_handler(update, context):
 def book_handler(update, context):
     message = update.message.text
     if message.startswith('/book '):
-        book_name = message[6:]
         result = fetch_books_info(book_name)
         if len(result['links']):
             book_name = result['titles'][0]

@@ -54,25 +54,20 @@ def pdfLink(link):
     end1=b.find('\">IP',start1)
     return [b[start:end],b[start1:end1]]
 
+
+
+
 def book_handler(update, context):
     message = update.message.text
     if message.startswith('/book '):
         book_name = message[6:]
-        reply_text = f'Hello, {book_name}!'
-        context.bot.send_message(chat_id=update.effective_chat.id, text=reply_text)
-
-
-
-def book_handler(update, context):
-    message = update.message.text
-    if message.startswith('/book '):
         result = fetch_books_info(book_name)
         if len(result['links']):
-            book_name = result['titles'][0]
+            titli = result['titles'][0]
             link=result['links'][0]
             link=pdfLink(link)
             print(link)
-            reply_text = f'Your book, {book_name}!\n\nLink1 : {link[0]}\n\nLink2 : {link[1]}'
+            reply_text = f'Your book, {titli}!\n\nLink1 : {link[0]}\n\nLink2 : {link[1]}'
         else:
             reply_text = "No book found. Check spelling of your query"
         context.bot.send_message(chat_id=update.effective_chat.id, text=reply_text)

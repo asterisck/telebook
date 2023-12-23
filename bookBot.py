@@ -68,13 +68,13 @@ def book_handler(update, context):
     if message.startswith('/book '):
         book_name = message[6:]
         result = fetch_books_info(book_name)
-        if result:
+        if len(result['links']):
             link=result['links'][0]
             link=pdfLink(link)
             print(link)
             reply_text = f'Your book, {book_name}!\n\nLink1 : {link[0]}\n\nLink2 : {link[1]}'
         else:
-            reply_text = "Some error occured"
+            reply_text = "No book found. Check spelling of your query"
         context.bot.send_message(chat_id=update.effective_chat.id, text=reply_text)
 
 bot = telegram.Bot(token='6896534467:AAH_8RPJLJdl822-SoxlBMF4oGRAcyyzYM0')

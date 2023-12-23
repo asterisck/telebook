@@ -69,6 +69,7 @@ def book_handler(update, context):
         book_name = message[6:]
         result = fetch_books_info(book_name)
         if len(result['links']):
+            book_name = result['titles'][0]
             link=result['links'][0]
             link=pdfLink(link)
             print(link)
